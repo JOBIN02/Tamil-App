@@ -2,8 +2,15 @@
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export default function signuppage() {
+  type signuppageNavigationProp = NativeStackNavigationProp<{
+    signup: undefined;  // No params for Signup screen
+    Main: undefined; // No params for Mainpage screen
+  }, 'signup'>;
+
   const [password, setPassword] = useState('');
   const handleSignUp = () => {
     if (password.length < 8) {
@@ -14,7 +21,10 @@ export default function signuppage() {
     }
   };
 
+  
+  const navigation = useNavigation<signuppageNavigationProp>();
   return (
+    
     <View style={styles.backgroundcontainer}>
       <View style={styles.container}>
         <TextInput style={styles.textinput} 
@@ -32,7 +42,7 @@ export default function signuppage() {
           accessibilityLabel="Password Input"
           value={password}
           onChangeText={setPassword}/>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate("Main")} style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         
