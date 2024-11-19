@@ -1,11 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+
+type frontpageNavigationProp = NativeStackNavigationProp<{
+  front: undefined;   // No params for Main screen
+  Login: undefined;  // No params for Login screen
+}, 'front'>;
+
 
 export default function frontpage() {
+  const navigation = useNavigation<frontpageNavigationProp>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SG60 Sakthi Blaze</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.button}>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
     </View>
